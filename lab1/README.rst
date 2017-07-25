@@ -38,14 +38,15 @@ WTG!?
 
 Git is an example of a Source Code Management (**SCM**) tool or Version Control System (**VCS**). A **SCM**/**VCS**, is a *system* that helps developers *manage*/*control* *versions* of their *source code*. Each **VCS** keeps track of different versions of code and usually offers tools for sharing and developing code in parallel with collaborators. This process is all covered under the blanket term **version control**.
 
-Has one of these happened to you?:
+Has one of these happened to you?::
 
 |	"I deleted my code and now it's all gone and I'm sad"
 |	"I changed something in my code and now everything is broken. I wish I could go back to when it was working..."
 |	"I saved like 20 different versions of my code but I don't know which ones work and how to find the vesion I want"
 |	"Jane made a great feature in the code she copy and pasted from me, but I've changed a lot of my code since then and it will take forever to figure out how to combine the two"
 
-Each version control system offers solutions to these common problems in software development. Although it is not the only **VCS** (others include Subversion (**SVN**), Mercurial, etc.), Git has become the most used VCS by far in recent years. This is partly because it is very simple to use and is very efficiency in what it does when compared to other version control systems. Let's explore the clever idea behind Git before we get to the lab work.
+
+Each version control system offers solutions to these common problems in software development. Although it is not the only **VCS** (others include Subversion (**SVN**), Mercurial, etc.), Git has become the most used **VCS** by far in recent years. This is partly because it is very simple to use and is very efficiency in what it does when compared to other version control systems. Let's explore the clever idea behind Git before we get to the lab work.
 
 
 ---------
@@ -136,10 +137,10 @@ You should see a confirmation message "Initialized empty Git repository". You ca
 
 Now we can start coding. In your favourite text editor, create the file *script1.py* with the following Python function::
 
-|	def HelloWorld():
-|		"""
-|		"""
-|		print("Hello World")
+|def HelloWorld():
+|    """
+|    """
+|    print("Hello World")
 
 Make sure to save the file to your lab1 directory. Now lets head back to the shell and see what Git thinks of our new file:
 
@@ -157,47 +158,47 @@ Now return to your text editor and make two new files, *data1.txt* and *data2.tx
 
 	**git** status 
 
-Let's say we do not want git to keep track of our data files until we find some real data. It's fine to leave them untracked in the lab1 directory, but the *Untracked files* notifications may get tiresome. To tell git to exclude specific files, we can create a *.gitignore* file in the repository. This can be done from the shell with:
+Let's say we do not want git to keep track of our data files until we find some real data. It's fine to leave them untracked in the lab1 directory, but the *Untracked files* notifications may get tiresome. To tell git to exclude specific files, we can create a *.gitignore* file in the repository. This can be done from the shell with::
 
-	> .gitignore
+|	"> .gitignore"
 
-Or in command line with:
+Or in command line with::
 
-	cd. >.gitignore
+|	"cd. >.gitignore"
 
 Now open up the *.gitignore* file and either add the two data files by name on separate lines, or use the wildcard character (\*) to exclude all text files with the single line::
 
-	\*.txt
+|	"\*.txt"
 
 Now add and commit your *.gitignore* to your git repository. Check that the text files are gone by checking the status of the repository yet again (you will probably do this often):
 
 	**git** status
 
-Now return to *script1.py* and define a second function *GoodbyeWorld* that prints "Goodbye World" so that the file looks like:
+Now return to *script1.py* and define a second function *GoodbyeWorld* that prints "Goodbye World" so that the file looks like::
 
-|	def HelloWorld():
-|	    """
-|    	"""
-|    	print('Hello World')
+|def HelloWorld():
+|    """
+|    """
+|    print('Hello World')
 |
-|	def GoodbyeWorld():
-|    	"""
-|    	"""
-|    	print('Goodbye World')
+|def GoodbyeWorld():
+|    """
+|    """
+|    print('Goodbye World')
 
-Save the file, then add your changes to the staging area. Before you commit, you remember you wanted to document your functions. Return to *script1.py* and fill in your empty docstrings. Remember that docstrings, like commit messages, should also be present tense and imperative. Now *script1.py* could look something like this:
+Save the file, then add your changes to the staging area. Before you commit, you remember you wanted to document your functions. Return to *script1.py* and fill in your empty docstrings. Remember that docstrings, like commit messages, should also be present tense and imperative. Now *script1.py* could look something like this::
 
-|	def HelloWorld():
-|    	"""
-|    	"Print Hello World"    
-|    	"""
-|    	print('Hello World')
+|def HelloWorld():
+|    """
+|    Print Hello World  
+|    """
+|    print('Hello World')
 |
-|	def GoodbyeWorld():
-|    	"""
-|    	"Print Goodbye World"
-|    	"""
-|    	print('Goodbye World')	
+|def GoodbyeWorld():
+|    """
+|    Print Goodbye World
+|    """
+|    print('Goodbye World')	
 
 If we check git status now, we see that script1.py is still staged from before, but now it also has unstaged changes. Let's say you want to check the difference between **your current directory and the last commit**, you can use the command:
 
