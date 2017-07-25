@@ -72,7 +72,7 @@ The genius idea behind Git is pretty simple:
 
 	DON'T copy every file and folder in your directory at each commit when most of the time only a few files (or a few lines of a few files) actually change from commit to commit. 
 
-What Git does instead is keeps track of your original directory as it was when you initialized it, and each commit only tracks the *changes* to each file. This way, if you write two lines in a file and commit it, Git only has to keep track of those two lines, where they are located, and assign a SHA-1 code to the commit. When you want to revert to a certain commit, Git simply has to take the original directory and total all of the changes to it from each commit in the chain up to the commit you chose. This is an *extremely* efficient process. 
+Instead, Git keeps track of your original directory as it was when you initialized it, and each commit only tracks the *changes* to each file on a case-by-case basis. This way, if you write two lines in a file and commit it, Git only has to keep track of those two lines, where they are located, and assign a SHA-1 code to the commit. When you want to revert to a certain commit, Git simply has to take the original directory and total all of the changes to it from each commit in the chain up to the commit you chose. This is an *extremely* efficient process. 
 
 For a fun fact/demonstation of Git's efficiency::
 
@@ -108,9 +108,12 @@ Config
 When using Git for the first time on a computer, it is useful to tell it your name and email. This is how Git will track who is making commits to a repository:
 
 	**git** config --global user.name "Your Full Name"
-	**git** config --global user.email you@somewhere.com
 
-This information will be stored in the *~/.gitconfig* file in your home diirectory.
+And:
+
+	**git** config --global user.email "you@somewhere.com"
+
+This information will be stored in the *~/.gitconfig* file in your home directory.
 
 
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -129,7 +132,7 @@ Enter your new directory using **cd**. Let's tell Git to track our directory:
 
 You should see a confirmation message "Initialized empty Git repository". You can check that the *.git* folder was created using:
 
-	**ls** --all
+	**ls** -all
 
 Now we can start coding. In your favourite text editor, create the file *script1.py* with the following Python function::
 
