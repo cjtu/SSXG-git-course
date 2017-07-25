@@ -40,10 +40,10 @@ Git is an example of a Source Code Management (**SCM**) tool or Version Control 
 
 Has one of these happened to you?:
 
-	"I deleted my code and now it's all gone and I'm sad"
-	"I changed something in my code and now everything is broken. I wish I could go back to when it was working..."
-	"I saved like 20 different versions of my code but I don't know which ones work and how to find the vesion I want"
-	"Jane made a great feature in the code she copy and pasted from me, but I've changed a lot of my code since then and it will take forever to figure out how to combine the two"
+|	"I deleted my code and now it's all gone and I'm sad"
+|	"I changed something in my code and now everything is broken. I wish I could go back to when it was working..."
+|	"I saved like 20 different versions of my code but I don't know which ones work and how to find the vesion I want"
+|	"Jane made a great feature in the code she copy and pasted from me, but I've changed a lot of my code since then and it will take forever to figure out how to combine the two"
 
 Each version control system offers solutions to these common problems in software development. Although it is not the only **VCS** (others include Subversion (**SVN**), Mercurial, etc.), Git has become the most used VCS by far in recent years. This is partly because it is very simple to use and is very efficiency in what it does when compared to other version control systems. Let's explore the clever idea behind Git before we get to the lab work.
 
@@ -76,11 +76,11 @@ Instead, Git keeps track of your original directory as it was when you initializ
 
 For a fun fact/demonstation of Git's efficiency::
 
-	The Ruby on Rails Git repository download, which includes the
-	full history of the project – every version of every file, weighs in at
-	around 13MB, which is not even twice the size of a single checkout of
-	the project (~9MB). The Subversion server repository for the same
-	project is about 115MB. 
+	The Ruby on Rails Git repository download, which includes the full 
+	history of the project – every version of every file, weighs in at
+	around 13 MB, which is not even twice the size of a single checkout 
+	of the project (~9 MB). The Subversion server repository for the 
+	same project is about 115 MB. 
 
 (Images borrowed from `A Visual Git Reference  <http://marklodato.github.io/visual-git-guide/index-en.html>`_ by marklodato on GitHub. The fun fact was taken from `PeepCode Git Internals <https://github.com/pluralsight/git-internals-pdf>`_ by Scott Chacon, the guide that inspired most of this lab. Refer to it for more info on anything Git!)
 
@@ -136,10 +136,10 @@ You should see a confirmation message "Initialized empty Git repository". You ca
 
 Now we can start coding. In your favourite text editor, create the file *script1.py* with the following Python function::
 
-	def HelloWorld():
-		"""
-		"""
-		print("Hello World")
+|	def HelloWorld():
+|		"""
+|		"""
+|		print("Hello World")
 
 Make sure to save the file to your lab1 directory. Now lets head back to the shell and see what Git thinks of our new file:
 
@@ -165,7 +165,7 @@ Or in command line with:
 
 	cd. >.gitignore
 
-Now open up the *.gitignore* file and either add the two data files by name on separate lines, or use the wildcard character (\*) to exclude all text files with the single line:
+Now open up the *.gitignore* file and either add the two data files by name on separate lines, or use the wildcard character (\*) to exclude all text files with the single line::
 
 	\*.txt
 
@@ -173,35 +173,37 @@ Now add and commit your *.gitignore* to your git repository. Check that the text
 
 	**git** status
 
-Now return to *script1.py* and define a second function *GoodbyeWorld* that prints "Goodbye World" so that the file looks like::
+Now return to *script1.py* and define a second function *GoodbyeWorld* that prints "Goodbye World" so that the file looks like:
 
-	def HelloWorld():
-	    """
-    	"""
-    	print('Hello World')
+|	def HelloWorld():
+|	    """
+|    	"""
+|    	print('Hello World')
+|
+|	def GoodbyeWorld():
+|    	"""
+|    	"""
+|    	print('Goodbye World')
 
-	def GoodbyeWorld():
-    	"""
-    	"""
-    	print('Goodbye World')
+Save the file, then add your changes to the staging area. Before you commit, you remember you wanted to document your functions. Return to *script1.py* and fill in your empty docstrings. Remember that docstrings, like commit messages, should also be present tense and imperative. Now *script1.py* could look something like this:
 
-Save the file, then add your changes to the staging area. Before you commit, you remember you wanted to document your functions. Return to *script1.py* and fill in your empty docstrings. Remember that docstrings, like commit messages, should also be present tense and imperative. Now *script1.py* could look something like this::
-
-	def HelloWorld():
-    	"""
-    	"Print Hello World"    
-    	"""
-    	print('Hello World')
-
-	def GoodbyeWorld():
-    	"""
-    	"Print Goodbye World"
-    	"""
-    	print('Goodbye World')	
+|	def HelloWorld():
+|    	"""
+|    	"Print Hello World"    
+|    	"""
+|    	print('Hello World')
+|
+|	def GoodbyeWorld():
+|    	"""
+|    	"Print Goodbye World"
+|    	"""
+|    	print('Goodbye World')	
 
 If we check git status now, we see that script1.py is still staged from before, but now it also has unstaged changes. Let's say you want to check the difference between **your current directory and the last commit**, you can use the command:
 
 	**git** diff
+
+If you ever get stuck in a *diff* or *log* command in the shell, type "q".
 
 But this doesn't show the changes you have already staged. To see the difference between your **staged changes and the last commit**, you can use the --cached flag:
 
@@ -210,6 +212,9 @@ But this doesn't show the changes you have already staged. To see the difference
 This is a good place to pause and make sure you understand what happens when you stage files, and what differences the "**git** diff" and "**git** diff --cached" are showing you. If you need to, you can discard all the changes to *script1.py* and return to just after we comitted the *.gitignore* using:
 
 	**git** reset HEAD
+
+THis discards the changes in the staging areas. Then to revert *script1.py* to the way it was at the last commit:
+
 	**git** checkout script1.py" 
 
 Then you can work through the changes to *script1.py* again starting with adding the GoodbyeWorld function, just to ensure that you know which changes went into the staging area. If you feel comfortable with the staged and unstaged changes to *script1.py*, we can move on to how we will commit them.
@@ -235,6 +240,8 @@ Here is where your commit messages shine! You can see the unique commit ID, the 
 We can filter log output too. Try:
 
 	**git** log -n 3
+
+Or:
 
 	**git** log --since="1 month ago" --until="10 minutes ago"
 
