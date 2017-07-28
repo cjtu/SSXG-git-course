@@ -293,6 +293,14 @@ Now, in this branch, we are no longer in *detached HEAD* state. It is now safe t
 
 	 **echo** "# Another day another feature" > script3.py
 
+Now add and commit your *script3.py*:
+
+	git add script3.py
+
+And:
+
+	git commit script3.py -m "Add script 3"
+
 Now we can have some fun with **git log**. You already know the **--oneline** flag to simplify output. Let's add a few more flags (**--all** to show all branches, **--decorate** to add branch names, **--graph** to show an ASCII representation of the repository. The order of the flags does not matter:
 
 	**git** log --all --decorate --graph --oneline
@@ -327,18 +335,21 @@ And it's always good to double-check:
 Lab 2 Part C - Working with Remotes
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Let's set up a GitHub repository to track your lab2 local repository. First head over to GitHub and log in. Add the top, select the "+" drop-down menu and "create new repository". There will be a few options. By convention, usernames and repositories on GitHub are usually all lowercase. Name your new repo "lab2" and give it a description. You can make it private and ignore the options about a README, .gitignore, and LICENSE for now.
+Let's set up a GitHub repository to track your lab2 local repository. First head over to GitHub and log in. Add the top, select the "+" drop-down menu and "create new repository". There will be a few options. By convention, usernames and repositories on GitHub are usually all lowercase. Name your new repo "lab2" and give it a description. If you got the **Student Developer Pack**, you can make the repository private for free, but if not you can make it public and delete it later. You can ignore the options about a README, .gitignore, and LICENSE for now.
 
 Because GitHub is very user-friendly, it already tells you what to do before I get a chance. Under "**...or push an existing repository from the command line**" you will see:
 
-	**git** remote add origin https://github/<your_username>/lab2.git
+	**git** remote add origin https://github.com/<your_username>/lab2.git
+
+Then:
+
 	**git** push --set-upstream origin master
 
-Do this from the command line (make sure you're in the lab2 git repository. You can type **pwd** to get your present working directory). If you used a different email to set up GitHub than the one you specified in you .gitconfig, you may need to update that with:
+Run this command. If you used a different email to set up GitHub than the one you specified in you .gitconfig, you may need to update that with:
 
 	**git** config --global user.email "<you@somewhere.com>"
 
-So what did we just do? A couple things. First, we added a new **remote** to lab2 called **origin**. Like the name **master**, we could ave called this anything, but by convention the remote that points to your centralized **master** branch is generally called **origin**. 
+So what did we just do? A couple things. First, we added a new **remote** to lab2 called **origin**. Like the name **master**, we could have called this anything, but by convention the remote that points to your remote **master** branch is generally called **origin**. 
 
 Then, we made our first **push** to remote repository. In doing so, we "set the upstream" by telling Git we always want this local repository to **push** and **fetch** from the remote we called **origin**. We also told Git which branch we were pushing to **origin** by specifying **master**.
 
