@@ -86,7 +86,7 @@ This is the case where the **other** branch and **master** branch have both chan
 
 .. image:: 3w_merge.png
 
-Here, Git processes all of the changes that occurred since "b325c" on both branches. Finding that none of the changes are in conflict with each other, Git imports all of the changes since "b325c" from **both branches** into the working directory and stages it for you. You then simply need to commit your merge. This is a good opportunity to ensure that everything is correct before permanently changing **master**, and also a good place to leave a nice commit message detailing the implications of the merge.
+Here, Git processes all of the changes that occurred since "b325c" on both branches. Finding that none of the changes are in conflict with each other, Git imports all of the changes since "b325c" from **both branches** into the working directory and adds the merge as a new "merge commit". 
 
 Notice that before initiating a merge you always want to be on the branch that you are merging changes *into*. After the merge, HEAD remains on that branch. When the **other** branch is successfully merged into **master**, all changes from it are now reflected in **master** and the **other** branch can be safely deleted.
 
@@ -197,7 +197,7 @@ Let's first make a file on the default **master** branch. Call it "script1.py" a
 
 Now let's add our first file:
 
-	**git** add script1
+	**git** add script1.py
 
 And make our first commit:
 
@@ -225,7 +225,7 @@ Even though it gave us confirmation, let's check our status again:
 
 Now that we are on **new_feature**, let's implement a new feature in file "script2.py":
 
-	**echo** "# Wow, this is a new feature!" > script2.py
+	**echo** "# Wow, this is a new feature" > script2.py
 
 Let's add this new file:
 
@@ -235,7 +235,7 @@ And commit it to the **new_feature** branch:
 
 	**git** commit -m "Add a new feature in script2.py"
 
-Okay, that was a lame feature. Let's open up script2.py and write a function:
+Okay, that was a lame feature. Let's open up script2.py and write a function::
 
 |def feature():
 |	"""Excellent docstring"""
