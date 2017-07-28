@@ -281,7 +281,7 @@ And checkout the "Add scipt1" commit using its SHA code:
 
 	**git** checkout <SHA>
 
-Here, you should have received your *detached HEAD* warning. Now if you were to make changes and commit them, you would be essentially "rewriting history". Git, as always, as your back and suggest instead to make a branch. So let's do that:
+Here, you should have received your *detached HEAD* warning. Now if you were to make changes and commit them, you would be essentially "rewriting history". Git, as always, has your back and suggests making a branch instead. So let's do that:
 
 	**git** branch another_feature
 
@@ -289,7 +289,7 @@ And switching to that branch:
 
 	**git** checkout another_feature
 
-Now, in this branch off of an old commit, we are no longer in *detached HEAD* state. It is now safe to make and commit changes. Say we want to add yet another feature, this time in "script3.py":
+Now, in this branch, we are no longer in *detached HEAD* state. It is now safe to make and commit changes. Say we want to add yet another feature, this time in "script3.py":
 
 	 **echo** "# Another day another feature" > script3.py
 
