@@ -2,7 +2,7 @@
 Lab 2
 =====
 
-Welcome to the second SSXG Git Course lab! This lab will teach you where Git shines: in collaborating with others! After learning a simple sequence of steps and commands in Git, you will never need to worry that your little changes may break everyone else's work.... but even if they do, you'll know what to do about it! 
+Welcome to the second SSXG Git Course lab! This lab will teach you where Git shines: in collaborating with others! After learning a simple sequence of steps and commands in Git, you will never need to worry that your little changes may break everyone else's work.... but even if they do, you'll know how to handle it! 
 
 
 --------
@@ -11,7 +11,7 @@ Overview
 
 By the end of lab 2, you will:
 
-- Have a good understanding of *branches* and *merges* in Git
+- Have a good understanding of *branches* and *merges* in a typical Git workflow
 - Understand why Git is referred to as a "**Distributed** Version Control System" (**DVCS**)
 - Learn how to collaborate in a **centralized workflow**
 - Master the  fundamental git commands *branch* and *merge*
@@ -94,9 +94,9 @@ Notice that before initiating a merge you always want to be on the branch that y
 The (Dreaded) Merge Conflict
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Occasionally when trying to merge branches, there will be changes that have been made to the same parts of the same file. This results in a **merge conflict**. Since Git doesn't understand code, it cannot decide which version to keep when lines have changed in both branches. This is good! Git simply flags the lines that are in conflict and allows you to choose which to keep in the merged version. We will practice this in the lab today.
+Occasionally when trying to merge branches, there will be changes that have been made to the same parts of the same file. This results in a **merge conflict**. Since Git doesn't understand code, it cannot decide which version to keep when lines have changed in both branches. This is good! Git simply flags the lines that are in conflict and allows you to choose which to keep in the merged version. Since you probably won't run into merge conflicts when working on your own individual repositories, but it is an integral part of collaborating with others, we will dedicate the first part of next week's lab to *Resolving the Merge Conflict*.
 
-Don't dread this! This is Git looking out for you and making sure you don't overwrite you collaborator's hard work.
+P.S. Don't dread this! This is Git looking out for you and making sure you don't overwrite you collaborator's hard work (or at the very least make you skim your collaborator's hard work before overwriting it with your own, superior work).
 
 ------------------------
 The Centralized Workflow
@@ -179,15 +179,216 @@ Other useful commands we will use:
 For a single searchable list with all your git command needs, bookmark this `cheatsheet <http://cheat.errtheblog.com/s/git>`_.
 
 
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-Lab 2a - Branching and Merging
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-Lab 2b - Working with Remotes
+Lab 2 Part A - Review / Setup
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Let's start a new repository for a quick refresher from lab1. Open a terminal window and cd into your Desktop. Make a directory called 'lab2':
+
+	**mkdir** lab2
+
+Initialize it:
+
+	**git** init
+
+Let's first make a file on the default **master** branch. Call it "script1.py" and put the comment "# This is script 1" on the first line. You can do this in explorer/finder or with the following command:
+
+	**echo** "# This is script 1" > script1.py
+
+Now let's add our first file:
+
+	**git** add script1
+
+And make our first commit:
+
+	**git** commit -m "Add script1"
+
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Lab 2 Part B - Branching and Merging
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Now let's branch our repository. Call the new branch **new_feature**:
+
+	**git** branch new_feature
+
+Let's see what our old friend *status* has to say:
+
+	**git** status
+
+We're still on branch **master**. Recall from lab1 that *checkout* allowed us to view old commits. It also allows us to change the current branch (i.e., it points HEAD to the branch we specify):
+
+	**git** checkout new_feature
+
+Even though it gave us confirmation, let's check our status again:
+
+	**git** status
+
+Now that we are on **new_feature**, let's implement a new feature in file "script2.py":
+
+	**echo** "# Wow, this is a new feature!" > script2.py
+
+Let's add this new file:
+
+	**git** add script2.py
+
+And commit it to the **new_feature** branch:
+
+	**git** commit -m "Add a new feature in script2.py"
+
+Okay, that was a lame feature. Let's open up script2.py and write a function:
+
+|def feature():
+|	"""Excellent docstring"""
+|	return("I'm the feature from script2!"")
+
+Let's quick commit this time:
+
+	**git** commit -a -m "Add feature function to script2.py"
+
+Now that we have a branch with a couple of commits, let's head back over to **master** to merge the changes:
+
+	**git** checkout master
+
+For the sake of demonstration, let's try to delete our **new_feature** branch "by accident" before we merge it:
+
+	**git** branch -d new_feature
+
+Git has your back and reminds you that **new_feature** is not yet merged. Let's merge it now. Add the "-v" flag for a full breakdown of what we're merging:
+
+	**git** merge new_feature -v
+
+Git notifies us this is a *Fast-Forward* merge. Since we did not change **master** before merging in **new_feature**, it fast-forwards **master** to the latest **new_feature** commit. As always:
+
+	**git** status
+
+Let's see our branch situation:
+
+	**git branch**
+
+Adding the "-v" flag tells us what commit each branch is on. Let's make sure they agree as we'd expect:
+
+	**git** branch -v
+
+Now since **new_feature** has been sucessfully merged into **master**, it is safe to delete:
+
+	**git** branch -d new_feature
+
+This is a good opportunity to talk about the "detached head" warning that we encountered when we tried to checkout an old commit in lab1. Remember HEAD *always* points to the most recent commit in each branch. So when you checkout an old commit, your HEAD (still pointing to the most recent commit) becomes detached. Let's try it. First find an old commit:
+
+	**git** log --abbrev-commit
+
+And checkout the "Add scipt1" commit using its SHA code:
+
+	**git** checkout <SHA>
+
+Here, you should have received your *detached HEAD* warning. Now if you were to make changes and commit them, you would be essentially "rewriting history". Git, as always, as your back and suggest instead to make a branch. So let's do that:
+
+	**git** branch another_feature
+
+And switching to that branch:
+
+	**git** checkout another_feature
+
+Now, in this branch off of an old commit, we are no longer in *detached HEAD* state. It is now safe to make and commit changes. Say we want to add yet another feature, this time in "script3.py":
+
+	 **echo** "# Another day another feature" > script3.py
+
+Now we can have some fun with **git log**. You already know the **--oneline** flag to simplify output. Let's add a few more flags (**--all** to show all branches, **--decorate** to add branch names, **--graph** to show an ASCII representation of the repository. The order of the flags does not matter:
+
+	**git** log --all --decorate --graph --oneline
+
+Woohoo! Now we can see the HEAD location, the **master** branch, the **another_feature** branch, the latest commits for each, and at which commit they diverged. And all this in only a few lines. This is a very simple example, but you can imagine ow useful it would be to visualize a project with a long commit history and several branches in this way. 
+
+Now comes the moment you've all been waiting for. A three-way merge. Recall three-way merges involve the most latest commit on two branches and the commit at which they diverged. Let's "*HEAD*" back over to the **master** branch (har har):
+
+	**git** checkout master
+
+And let's merge **another_feature** into **master**
+
+	**git** merge another_feature
+
+And it's as simple as that. Let's see how that merge shows up in the commit history:
+
+	**git** log
+
+Notice that our *Fast-forward* merge simply entered commits as if they were always on **master**, but the recent *three-way* merge has its own commit message "Merge branch 'another_feature'". If ever you want to see the commit history without merge commit message, do:
+
+	**git** log --no-merges
+
+Don't forget to delete the another_feature branch when you are finished with it!
+
+	**git** branch -d another_feature
+
+And it's always good to double-check:
+
+	**git** branch
+
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Lab 2 Part C - Working with Remotes
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Let's set up a GitHub repository to track your lab2 local repository. First head over to GitHub and log in. Add the top, select the "+" drop-down menu and "create new repository". There will be a few options. By convention, usernames and repositories on GitHub are usually all lowercase. Name your new repo "lab2" and give it a description. You can make it private and ignore the options about a README, .gitignore, and LICENSE for now.
+
+Because GitHub is very user-friendly, it already tells you what to do before I get a chance. Under "**...or push an existing repository from the command line**" you will see:
+
+	**git** remote add origin https://github/<your_username>/lab2.git
+	**git** push --set-upstream origin master
+
+Do this from the command line (make sure you're in the lab2 git repository. You can type **pwd** to get your present working directory). If you used a different email to set up GitHub than the one you specified in you .gitconfig, you may need to update that with:
+
+	**git** config --global user.email "<you@somewhere.com>"
+
+So what did we just do? A couple things. First, we added a new **remote** to lab2 called **origin**. Like the name **master**, we could ave called this anything, but by convention the remote that points to your centralized **master** branch is generally called **origin**. 
+
+Then, we made our first **push** to remote repository. In doing so, we "set the upstream" by telling Git we always want this local repository to **push** and **fetch** from the remote we called **origin**. We also told Git which branch we were pushing to **origin** by specifying **master**.
+
+Whew.
+
+Now click over to your /<username>/lab2 page on GitHub. On the code tab you should see our script1, scipt2 and script3 files. Congratulatiions, you pushed a *local* repository to a *remote repository*! 
+
+Now, say there is an existing GitHub repository we want to have locally on a different computer or want to **clone** a collaborator's repository to start working on it. First we would go to that repository's page on GitHub and hit the green "clone or download" button on the right to copy the full web url path. THen we would navigate to the folder where we want the repository to reside. Let's **cd** to the Documents folder (or somewhere that isn't the Desktop).
+
+	**cd** /Users/<you>/Documents
+
+Let's **clone** our repository into the Documents folder, recalling the http path we copied earlier:
+
+	**git** clone https://github.com/<username>/lab2.git
+
+Now you've cloned a remote repository! Let's **cd** into it:
+
+	**cd** lab2
+
+And we can look at our beautiful scripts straight outta GitHub:
+
+	**ls**
+
+Now you know how to start a remote repository on GitHub, clone that repository as a local repository, and begin working on your code. Now, before you start working on a *local repository*, recall the tenets of the **centralized workflow**:
+
+1) Before starting work, **fetch** and **merge** the most up-to-date version of the *shared repository* into the *local repository* 
+
+		**git** fetch origin -v
+
+	Changes, if any, are stored in the local "origin/master" branch. If necessary:
+
+		**git** merge origin/master
+
+2) Work on changes locally and, when ready, **commit** those changes locally. 
+
+	*I will add to this: first make a development branch off of master to start making changes, and merge it back into master when you are ready to push*
+
+		**git** branch development
+
+	Work on new branch awhile and then switch back to **master** and:
+
+		**git** merge development
+
+3) Before sharing the local changes, **fetch** changes from the *shared repository* once again in case it has been changed by another *developer*. If necessary, **merge** those fetched changes locally.
+
+	Same protocol as Number 1.
+
+4) Finally **push** the local changes to the *shared repository* for all other collaborators to **fetch** and enjoy.
+
+		**git** push origin master
 
 
 Congratulations for making it through Lab 2!
@@ -200,14 +401,13 @@ Recap
 In this lab you learned:
 
 - How Git's repositories are distributed rather than localized
-- How to work on a team in a *centralized workflow*
+- How to work in a *centralized workflow*
 - How to get a bunch of free stuff from GitHub
 - How to branch a repository
 - How to merge a branch into the master branch of a repository
-- How to set up and manage a remote 
+- The difference between a fast-forward and three-way merge
 - How to start a repository on GitHub and point to it with a remote
 - How to push to a remote
-- How to fetch and pull from a remote
-- When to push, pull, and fetch to minimize merge conflicts
+- How to clone a repository from GitHub
 
-Next week, we will culminate the lab course with a final project that we will work on in parallel using the centralized workflow!
+Next week, we will culminate the lab course by talking about merge conflicts, and working on a final project in parallel using the centralized workflow!
