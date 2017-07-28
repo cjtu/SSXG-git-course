@@ -239,7 +239,7 @@ Okay, that was a lame feature. Let's open up script2.py and write a function::
 
 |def feature():
 |	"""Excellent docstring"""
-|	return("I'm the feature from script2!"")
+|	return("I'm the feature from script2!")
 
 Let's quick commit this time:
 
