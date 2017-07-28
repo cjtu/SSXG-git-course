@@ -273,7 +273,7 @@ Now since **new_feature** has been sucessfully merged into **master**, it is saf
 
 	**git** branch -d new_feature
 
-This is a good opportunity to talk about the "detached head" warning that we encountered when we tried to checkout an old commit in lab1. Remember HEAD *always* points to the most recent commit in each branch. So when you checkout an old commit, your HEAD (still pointing to the most recent commit) becomes detached. Let's try it. First find an old commit:
+This is a good opportunity to talk about the "detached head" warning that we encountered when we tried to checkout an old commit in lab1. Remember HEAD *always* points to the most recent commit in a branch. So when you checkout an old commit, the HEAD (still pointing to the most recent commit on that branch) becomes detached. Let's try it. First find an old commit:
 
 	**git** log --abbrev-commit
 
