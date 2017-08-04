@@ -1,4 +1,4 @@
-Some thought provoking questions to get you started. Remember to feel free to add, edit, or update any of the answers. - Christian
+Some thought provoking questions to get you started. Remember to feel free to add, edit, or update any and/or all of the answers. - Christian
 
 
 Q: Why do we need the staging area? Can't we just commit every file one by one? - Christian
