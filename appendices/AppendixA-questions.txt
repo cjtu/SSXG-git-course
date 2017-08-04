@@ -1,1 +1,10 @@
- 
+Some thought provoking questions to get you started. Remember to feel free to add, edit, or update any of the answers. - Christian
+
+
+Q: Why do we need the staging area? Can't we just commit every file one by one? - Christian
+
+
+Q: Why is it called a "pull request" and not a "push request"? - Christian
+
+
+Q: What is your favourite part of Git? - Christian 
