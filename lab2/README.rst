@@ -337,27 +337,27 @@ Lab 2 Part C - Working with Remotes
 
 Let's set up a GitHub repository to track your lab2 local repository. First head over to GitHub and log in. Add the top, select the "+" drop-down menu and "create new repository". There will be a few options. By convention, usernames and repositories on GitHub are usually all lowercase. Name your new repo "lab2" and give it a description. If you got the **Student Developer Pack**, you can make the repository private for free, but if not you can make it public and delete it later. You can ignore the options about a README, .gitignore, and LICENSE for now.
 
-Because GitHub is very user-friendly, it already tells you what to do before I get a chance. Under "**...or push an existing repository from the command line**" you will see:
+Once you click **create repository**, you have officially made a GitHub repository. Now, back in the terminal window in the *lab2* directory, we can add the GitHub repository as a remote. By convention, we call it **origin**:
 
 	**git** remote add origin https://github.com/<your_username>/lab2.git
 
-Then:
+Then to add our local *lab2* to the remote *lab2*, we use the **git push** command. The first time we use it, we will add the "-u" flag which is short for "set upstream". This tells Git that in all future pushes from the **master** branch, we want the remote to be **origin**:
 
-	**git** push --set-upstream origin master
+	**git** push -u origin master
 
-Run this command. If you used a different email to set up GitHub than the one you specified in you .gitconfig, you may need to update that with:
+If the command fails, it may be because you used a different email to set up GitHub than the one you specified in you .gitconfig. Remember can always update your local email setting with:
 
 	**git** config --global user.email "<you@somewhere.com>"
 
-So what did we just do? A couple things. First, we added a new **remote** to lab2 called **origin**. Like the name **master**, we could have called this anything, but by convention the remote that points to your remote **master** branch is generally called **origin**. 
+So what did we just do? Let's recap. First, we added a new **remote** to lab2 called **origin**. Like the name **master**, we could have called this anything, but by convention the remote that points to your remote **master** branch is generally called **origin**. 
 
-Then, we made our first **push** to remote repository. In doing so, we "set the upstream" by telling Git we always want this local repository to **push** and **fetch** from the remote we called **origin**. We also told Git which branch we were pushing to **origin** by specifying **master**.
+Then, we made our first **push** to remote repository. In doing so, we "set the upstream" by telling Git that we always want this local **master** branch to **push** and **fetch** from the remote branch that we called **origin**. 
 
 Whew.
 
-Now click over to your /<username>/lab2 page on GitHub. On the code tab you should see our script1, scipt2 and script3 files. Congratulatiions, you pushed a *local* repository to a *remote repository*! 
+Now click over to your /<username>/lab2 page on GitHub. On the code tab you should see our script1, scipt2 and script3 files. Congratulatiions, you pushed a *local* repository to GitHub! 
 
-Now, say there is an existing GitHub repository we want to have locally on a different computer or want to **clone** a collaborator's repository to start working on it. First we would go to that repository's page on GitHub and hit the green "clone or download" button on the right to copy the full web url path. THen we would navigate to the folder where we want the repository to reside. Let's **cd** to the Documents folder (or somewhere that isn't the Desktop).
+In some scenarios, we will start a local repository first and then push to GitHub like we just did. In other cases, there may be an existing GitHub repository we want to have locally (i.e., a collaborator's repository that we want to work on). We do this using the **git clone** command. First we would go to that repository's page on GitHub and hit the green "clone or download" button on the right to copy the full web url path. Then we would navigate to the folder where we want the repository to reside. Let's **cd** to the Documents folder (or somewhere that isn't the Desktop).
 
 	**cd** /Users/<you>/Documents
 
