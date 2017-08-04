@@ -44,7 +44,7 @@ Branching is a simple, lightweight way to crate an alternate line of commits in 
 
 When comitting to a repository with only one **master** branch, here you can see that the staged changes are added as a new commit and the **master** branch now points to the new latest commit, "f0cec". Recall that HEAD points to the current branch. Since there is only one branch, HEAD always points to **master** and moves along with it in the commit:
 
-.. image:: commit_one_branch.png
+.. image:: commit_single_branch.png
 
 Now, say we branched **master** earlier with a maintenance branch called "**maint**". To commit to **maint**, we would switch to the **maint** branch, stage, and commit our changes there. Here you can see that the new commit, "1800b" begins a separate history from **master**. HEAD still points to **maint**, and **maint** now points to our new commit in uncharted waters, "1800b":
 
